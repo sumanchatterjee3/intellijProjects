@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id = "numberGenerator" class="udemy.learnspring.NumberGeneratorImpl"/>
+    <bean id="game" class="udemy.learnspring.GameImpl">
+      <!-- for setting constructor based dependency injection Option 1 from GameImpl.java
+        <constructor-arg ref="numberGenerator"/>-->
+        
+        <!-- Setter Based DI. Option 2 from GameImpl.java-->
+        <property name="numberGenerator" ref="numberGenerator"/>
+    </bean>
+
+</beans>
