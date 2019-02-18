@@ -3,6 +3,9 @@ package udemy.learnspring;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class GameImpl implements Game {
 
     // ==Constants==
@@ -18,7 +21,26 @@ public class GameImpl implements Game {
     private int remainingGuesses;
     private boolean validNumberRange = true;
 
-/*
+    //==init==
+    @PostConstruct
+    @Override
+    public void reset() {
+        number = numberGenerator.next();
+        guess = 0;
+        smallest = 0;
+        largest = numberGenerator.getMaxNumber();
+        remainingGuesses = guessCount;
+        logger.debug("The Number Generated in the Game is: {}", number);
+    }
+
+    @PreDestroy
+    public void preDestroy(){
+        logger.info("In game preDestroy()..");
+    }
+
+
+
+    /*
     // == Constructors for setting constructor based dependency injection  Option 1==
     public GameImpl(NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
@@ -31,17 +53,8 @@ public class GameImpl implements Game {
     }
 
 
-    //==Public Methods==
-    @Override
-    public void reset() {
-        number = numberGenerator.next();
-        guess = 0;
-        smallest = 0;
-        largest = numberGenerator.getMaxNumber();
-        remainingGuesses = guessCount;
-        logger.debug("The Number Generated in the Game is: {}", number);
-    }
 
+    //==Public Methods==
     @Override
     public int getNumber() {
         return number;

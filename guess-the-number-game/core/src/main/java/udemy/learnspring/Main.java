@@ -26,7 +26,9 @@ public class Main {
 
         //get the game Bean from context(container)
         Game game = ctx.getBean(Game.class);
-        game.reset();
+
+        //Commenting the reset method
+        //game.reset();
 
         //close the container context
         ctx.close();
